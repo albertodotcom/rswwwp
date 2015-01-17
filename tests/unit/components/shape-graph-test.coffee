@@ -24,5 +24,4 @@ test 'it changes the style to the expected one', ->
 
   @append()
 
-  debugger
   equal(component.$('.shape').attr('style'), 'height: 70%; width: 70%;')
