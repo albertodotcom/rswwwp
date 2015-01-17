@@ -1,5 +1,25 @@
 // My Mixins
 
+@mixin animation-duration($value) {
+  -webkit-animation-duration: $value;
+  animation-duration: $value;
+}
+
+@mixin animation-fill-mode($value) {
+  -webkit-animation-fill-mode: $value;
+  animation-fill-mode: $value;
+}
+
+@mixin animation-iteration-count($value) {
+  -webkit-animation-iteration-count: $value;
+  animation-iteration-count: $value;
+}
+
+@mixin animation-name($value) {
+  -webkit-animation-name: $value;
+  animation-name: $value;
+}
+
 @mixin border-radius($value) {
   -webkit-border-radius: $value;
   -moz-border-radius: $value;
@@ -12,6 +32,11 @@
   display: -ms-flexbox;      /* TWEENER - IE 10 */
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin transform($value) {
+  -webkit-transform: scale3d($value);
+  transform: scale3d($value);
 }
 
 @mixin transition($value) {
