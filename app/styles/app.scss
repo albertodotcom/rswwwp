@@ -4,6 +4,14 @@
 @import 'modules/shape';
 @import 'modules/endpoints';
 
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+// general layout styles
 .l-max_width {
   max-width: 960px;
 }
