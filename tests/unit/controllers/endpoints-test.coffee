@@ -12,3 +12,4 @@ test 'has defaults properties', ->
 
   equal(ctrl.get('pollingInterval'), 10000)
   equal(ctrl.get('isPolling'), false)
+  equal(ctrl.get('maximumTime'), 3000)

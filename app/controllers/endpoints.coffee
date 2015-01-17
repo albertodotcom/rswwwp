@@ -7,6 +7,8 @@ EndpointsController = Ember.ArrayController.extend
 
   isPolling: false
 
+  maximumTime: 3000
+
   actions:
     addEndPoint: ->
       newEndpoint = @store.createRecord 'endpoint',
