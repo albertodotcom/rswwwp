@@ -34,11 +34,6 @@
   display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 
-@mixin transform($value) {
-  -webkit-transform: scale3d($value);
-  transform: scale3d($value);
-}
-
 @mixin transition($value) {
   -webkit-transition: $value;
   -moz-transition: $value;
