@@ -1,9 +1,9 @@
 <section class='topbar'>
   <form class='topbar-form' {{action 'addEndPoint' on='submit'}}>
     <label class='topbar-form-label'>Add url:&nbsp{{input type='url' value=newEndPoint class='topbar-form-input' placeholder='http://www.example.com'}}</label>
-    <button name="submit" class='topbar-form-button'>Track</button>
+    <button name="submit" class='btn btn-1'>Track</button>
   </form>
-  <button {{action 'ping'}}>Ping</button>
+  <button class='btn btn-1' {{action 'ping'}}>Ping</button>
   {{input type='checkbox' checked=isPolling}}
 </section>
 
