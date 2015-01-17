@@ -10,10 +10,9 @@
 <section>
   {{#each}}
   <h2>{{uri}}</h2>
-  <ul>
-    {{#each ping in pings}}
-    <li>{{format-date ping.date}}: {{ping.pingTime}} ms</li>
-    {{/each}}
-  </ul>
+  {{shape-graph ratio=lastPingRatio}}
+  {{#with pings.lastObject as ping}}
+  <div>{{format-date ping.date}}: {{ping.pingTime}} ms</div>
+  {{/with}}
   {{/each}}
 </section>
