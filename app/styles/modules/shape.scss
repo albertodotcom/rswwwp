@@ -11,7 +11,7 @@
   height: 50%;
   width: 50%;
 
-  border-radius: 50%;
+  @include border-radius(50%);
   background-color: red;
-  transition: all 0.5s ease;
+  @include transition(all 0.5s ease);
 }
