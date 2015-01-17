@@ -8,12 +8,14 @@
 </section>
 
 <section class='endpoints'>
+
   {{#each}}
   <div class='endpoints-widget'>
-  <h2>{{uri}}</h2>
-  {{shape-graph ratio=lastPingRatio}}
+  <h3 class='endpoints-widget-title'>{{uri}}</h3>
   {{#with pings.lastObject as ping}}
-  <div>{{format-date ping.date}}: {{ping.pingTime}} ms</div>
+  <div>Last ping: {{format-date ping.date}}. Response Time: {{ping.pingTime}} ms</div>
   {{/with}}
+  {{shape-graph ratio=lastPingRatio}}
   {{/each}}
+
 </section>
