@@ -1,2 +1,12 @@
-@import 'mixin';
+@import 'mixins';
+
+@import 'modules/animate';
 @import 'modules/shape';
+
+.l-max_width {
+  max-width: 960px;
+}
+
+.l-center_text {
+  text-align: center;
+}
