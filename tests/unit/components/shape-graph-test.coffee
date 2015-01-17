@@ -20,8 +20,11 @@ test 'it changes the style to the expected one', ->
   Ember.run ->
     component.set('ratio', 70)
 
-  equal(component.get('style'), 'height: 70%; width: 70%;')
+  color = component.get('color')
+  expectedResult = "height: 70%; width: 70%; background-color: #{color}"
+
+  equal(component.get('style'), expectedResult)
 
   @append()
 
-  equal(component.$('.shape').attr('style'), 'height: 70%; width: 70%;')
+  equal(component.$('.shape').attr('style'), expectedResult)
