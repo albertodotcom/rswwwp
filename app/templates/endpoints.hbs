@@ -7,8 +7,9 @@
   {{input type='checkbox' checked=isPolling}}
 </section>
 
-<section>
+<section class='endpoints'>
   {{#each}}
+  <div class='endpoints-widget'>
   <h2>{{uri}}</h2>
   {{shape-graph ratio=lastPingRatio}}
   {{#with pings.lastObject as ping}}

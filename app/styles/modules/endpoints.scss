@@ -1,0 +1,13 @@
+// Endpoints style
+
+.endpoints {
+  @include flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.endpoints-widget {
+  width: 300px;
+  height: 300px;
+  margin: 0 15px;
+}

@@ -1,10 +1,11 @@
 .shape-container {
-  display: flex;
+  @include flex;
   align-items: center;
   justify-content: center;
 
   width: 200px;
   height: 200px;
+  margin: 0 auto;
 }
 
 .shape {
