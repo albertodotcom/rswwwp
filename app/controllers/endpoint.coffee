@@ -30,6 +30,19 @@ EndpointController = Ember.ObjectController.extend
 
   runInterval: null
 
+  lastPingRatio: (->
+    maximumTime = @get('controllers.endpoints.maximumTime')
+
+    lastPing = @get('pings.lastObject.pingTime')
+
+    pingRatio = lastPing / maximumTime * 100
+
+    if pingRatio >= 100
+      100
+    else
+      pingRatio
+  ).property('pings.@each', 'controllers.endpoints.maximumTime')
+
   pingPolling: (->
     if @get('controllers.endpoints.isPolling') is true
       @pingUrl()
