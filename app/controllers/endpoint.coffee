@@ -10,13 +10,16 @@ EndpointController = Ember.ObjectController.extend
 
     if uri?
       Ember.$.ajax
-        type: 'head'
-        url: uri
+        type: 'GET'
+        url: "http://localhost:4200/ping?url=#{uri}"
         cache: false
-      .always =>
+      .always (data, textStatus, error) =>
         receiveTime = (new Date()).getTime()
 
-        pingTime = receiveTime - sendTime
+        pingTime = if data.statusCode isnt 404
+          receiveTime - sendTime
+        else
+          @get('controllers.endpoints.maximumTime')
 
         ping = @store.createRecord 'ping',
           date: new Date()
