@@ -9,12 +9,17 @@ EndpointsController = Ember.ArrayController.extend
 
   maximumTime: 3000
 
+  newEndPoint: ''
+
   actions:
     addEndPoint: ->
       newEndpoint = @store.createRecord 'endpoint',
         uri: @get('newEndPoint')
 
-      newEndpoint.save()
+      newEndpoint.save().then =>
+        @set('newEndPoint', '')
+
+        @findBy('id', newEndpoint.get('id')).pingUrl()
 
     ping: ->
       @toArray().forEach (endpoint) ->
