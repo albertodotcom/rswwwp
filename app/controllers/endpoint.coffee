@@ -37,6 +37,10 @@ EndpointController = Ember.ObjectController.extend
       .always (data, status) =>
         receiveTime = (new Date()).getTime()
 
+        # the local proxy server return 404 if the website is not responding
+        if data.statusCode is 404
+          return reject()
+
         if data.statusCode is 200 or status is 'success' or data.status is 0
           # data.statusCode this value comes from my proxy server
           # status is 'success' this comes from a domain that allows cors
