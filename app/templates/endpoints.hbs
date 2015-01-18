@@ -10,13 +10,13 @@
 
     <span>or<span>
 
-        <button class='btn btn-1' {{action 'togglePolling'}}>
-          {{#if isPolling}}
-          Stop Polling
-          {{else}}
-          Ping in polling
-          {{/if}}
-        </button>
+    <button class='btn btn-1' {{action 'togglePolling'}}>
+      {{#if isPolling}}
+      Stop Polling
+      {{else}}
+      Ping in polling
+      {{/if}}
+    </button>
 
     <span>every 10 seconds</span>
   </div>
@@ -27,11 +27,20 @@
 
   {{#each}}
   <div class='endpoints-widget'>
+
+  {{#if pings.lastObject.dead}}
+  <p class='endpoint-widget-error animate animate-infinite animate-pulse'>Dead</p>
+  {{else}}
   {{shape-graph ratio=lastPingRatio}}
+  {{/if}}
+
   <a {{bind-attr href=uri}} target='_blank' class='endpoints-widget-title'>{{uri}}</a>
+
   {{#with pings.lastObject as ping}}
+
   <div>Last ping: {{format-date ping.date}}. Response Time: {{ping.pingTime}} ms</div>
   {{/with}}
+
   {{/each}}
 
 </section>

@@ -18,6 +18,18 @@
   background-color: $color05;
 }
 
+.endpoint-widget-error {
+  height: 200px;
+  width: 200px;
+  margin: 0 auto;
+
+  line-height: 200px;
+  text-align: center;
+  font-size: $font-size-1;
+  color: $color06;
+  text-transform: uppercase;
+}
+
 .endpoints-widget-title {
   display: block;
   margin-bottom: 15px;

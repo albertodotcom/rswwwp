@@ -5,5 +5,6 @@ Ping = DS.Model.extend
 
   date: DS.attr('date')
   pingTime: DS.attr('number')
+  dead: DS.attr('boolean'), defaultValue: false
 
 `export default Ping`
