@@ -14,6 +14,31 @@ test 'it renders', ->
   @append()
   equal component._state, 'inDOM'
 
+test 'color returns hsl(120, 100%, 75%) if ratio is undefined', ->
+  component = @subject()
+
+  Ember.run ->
+    component.set('ratio', undefined)
+
+  color = component.get('color')
+
+  equal(color, 'hsl(120, 100%, 75%)')
+
+test 'it changes the style to the expected one. Ratio is undefined', ->
+  component = @subject()
+
+  Ember.run ->
+    component.set('ratio', undefined)
+
+  color = component.get('color')
+  expectedResult = "height: 0%; width: 0%; background-color: #{color}"
+
+  equal(component.get('style'), expectedResult)
+
+  @append()
+
+  equal(component.$('.shape').attr('style'), expectedResult)
+
 test 'it changes the style to the expected one', ->
   component = @subject()
 
