@@ -1,45 +1,96 @@
+`import config from '../config/environment'`
 `import Ember from 'ember'`
 
+###*
+@class EndpointController
+@extend Ember.ObjectController
+###
 EndpointController = Ember.ObjectController.extend
+  ###*
+  @property needs
+  @type {Array<Strings>}
+  @extend Ember.ObjectController
+  ###
   needs: ['endpoints']
 
-  pingUrl: (->
-    uri = @get('uri')
+  ###*
+  Send and ajax request and return a promise which resolves
+  with the number of milliseconds
 
-    sendTime = (new Date()).getTime()
+  @method performRequest
+  @param url {String}
+  @return {Promise}
+    @fulfill {Integer} time in milliseconds
+  ###
+  performRequest: (uri) ->
+    if config.APP.PROXYSERVER?
+      uri = "#{config.APP.PROXYSERVER}?url=#{uri}"
 
-    if uri?
+    new Ember.RSVP.Promise (resolve, reject) =>
+
+      sendTime = (new Date()).getTime()
+
       Ember.$.ajax
         type: 'GET'
-        url: "http://localhost:4200/ping?url=#{uri}"
+        url: uri
         cache: false
-      .always (data, textStatus, error) =>
+      .always (data, status) =>
         receiveTime = (new Date()).getTime()
 
-        pingTime = if data.statusCode isnt 404
-          receiveTime - sendTime
+        if data.statusCode is 200 or status is 'success' or data.status is 0
+          # data.statusCode this value comes from my proxy server
+          # status is 'success' this comes from a domain that allows cors
+          # data.status this comes from a domain that doesn't allow cors
+          resolve(receiveTime - sendTime)
         else
-          @get('controllers.endpoints.maximumTime')
+          reject()
 
-        ping = @store.createRecord 'ping',
-          date: new Date()
-          pingTime: pingTime
+  ###*
+  Ping the endpoint and then create a ping instance
+  that belongs to this endpoint
 
-        endpoint = @get('model')
+  @method pingUrl
+  ###
+  pingUrl: ->
+    uri = @get('uri')
 
-        if ping.save()
-          endpoint.get('pings').pushObject(ping)
-          endpoint.save()
-  ).on('init')
+    endpoint = @get('model')
 
+    ping = @store.createRecord 'ping',
+      date: new Date()
+
+    @performRequest(uri)
+    .then (pingTime) =>
+      ping.set('pingTime', pingTime)
+
+    .catch =>
+      ping.set('dead', true)
+
+    .finally ->
+      if ping.save()
+        endpoint.get('pings').pushObject(ping)
+        endpoint.save()
+
+  ###*
+  Interval to the next ping
+
+  @property runInterval
+  @type {Ember.Interval}
+  ###
   runInterval: null
 
+  ###*
+  Get the last ping from the pings array
+
+  @property lastPingRatio
+  @type {Integer}
+  ###
   lastPingRatio: (->
     maximumTime = @get('controllers.endpoints.maximumTime')
 
     lastPing = @get('pings.lastObject.pingTime')
 
-    pingRatio = lastPing / maximumTime * 100
+    pingRatio = parseInt(lastPing / maximumTime * 100)
 
     if pingRatio >= 100
       100
@@ -47,6 +98,11 @@ EndpointController = Ember.ObjectController.extend
       pingRatio
   ).property('pings.@each', 'controllers.endpoints.maximumTime')
 
+  ###*
+  Execute a ping after a certain amount of time
+
+  @method pingPolling
+  ###
   pingPolling: (->
     if @get('controllers.endpoints.isPolling') is true
       @pingUrl()
@@ -57,10 +113,38 @@ EndpointController = Ember.ObjectController.extend
       Ember.run.cancel(@get('runInterval'))
 
       newRunInterval = Ember.run.later(@, @pingPolling, pollingInterval)
+
       @set('runInterval', newRunInterval)
   ).observes(
     'controllers.endpoints.pollingInterval',
     'controllers.endpoints.isPolling'
-  ).on('init')
+  )
+
+  ###*
+  Maximum Number of pings stored
+
+  @property maxPings
+  @type {Integer}
+  ###
+  maxPings: 3
+
+  ###*
+  Check the number of pings and delete the oldest one
+
+  @method deleteOldPings
+  ###
+  deleteOldPings: (->
+    pingsCount = @get('pings.length')
+
+    if pingsCount > @get('maxPings')
+      endpoint = @get('model')
+      ping = @get('pings.firstObject')
+
+      endpoint.get('pings').removeObject(ping)
+      endpoint.save()
+
+      ping.destroyRecord()
+
+  ).observes('pings.[]')
 
 `export default EndpointController`
