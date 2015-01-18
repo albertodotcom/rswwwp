@@ -165,6 +165,11 @@ EndpointController = Ember.ObjectController.extend
   ).property('maxPings', 'pings.@each')
 
   actions:
+    ###*
+    Delete an endpoint and all its pings
+
+    @event delete
+    ###
     delete: ->
       endpoint = @get('model')
       pings = @get('pings')
