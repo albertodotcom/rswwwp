@@ -6,7 +6,7 @@
 
   {{#if model.length}}
   <div class='pingbar'>
-    <button class='btn btn-1' {{bind-attr disabled=isPolling}} {{action 'ping'}}>Ping all now</button>
+    <button class='btn btn-1' {{bind-attr disabled='isPolling'}} {{action 'ping'}}>Ping all now</button>
 
     <span>or<span>
 
