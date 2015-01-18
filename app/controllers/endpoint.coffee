@@ -126,7 +126,7 @@ EndpointController = Ember.ObjectController.extend
   @property maxPings
   @type {Integer}
   ###
-  maxPings: 3
+  maxPings: 10
 
   ###*
   Check the number of pings and delete the oldest one
