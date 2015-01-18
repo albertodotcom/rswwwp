@@ -27,19 +27,23 @@
 
   {{#each}}
   <div class='endpoints-widget'>
+    <div class='endpoints-widget-buttons'>
+      <span class='btn btn-2 btn-square' {{action 'delete'}}>&times</span>
+    </div>
+    {{#if pings.lastObject.dead}}
+    <p class='endpoint-widget-error animate animate-infinite animate-pulse'>Dead</p>
+    {{else}}
+    {{shape-graph ratio=lastPingRatio}}
+    {{/if}}
 
-  {{#if pings.lastObject.dead}}
-  <p class='endpoint-widget-error animate animate-infinite animate-pulse'>Dead</p>
-  {{else}}
-  {{shape-graph ratio=lastPingRatio}}
-  {{/if}}
+    <a {{bind-attr href=uri}} target='_blank' class='endpoints-widget-title'>{{uri}}</a>
 
-  <a {{bind-attr href=uri}} target='_blank' class='endpoints-widget-title'>{{uri}}</a>
+    {{#with pings.lastObject as ping}}
 
-  {{#with pings.lastObject as ping}}
-
-  <div>Last ping: {{format-date ping.date}}. Response Time: {{ping.pingTime}} ms</div>
-  {{/with}}
+    <p class='endpoint-widget-info'>Last ping: {{format-date ping.date}}.</p>
+    <p class='endpoint-widget-info'>Response Time: {{ping.pingTime}} ms</p>
+    <p class='endpoint-widget-info'>Avarage Time: {{avgPingTime}} ms</p>
+    {{/with}}
 
   {{/each}}
 

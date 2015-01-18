@@ -25,3 +25,22 @@
   color: $color05;
   background-color: $color01;
 }
+
+.btn-2 {
+  padding: 5px;
+
+  font-size: $font-size-1;
+  color: $color05;
+  background-color: $color06;
+}
+
+.btn-square {
+  display: inline-block;
+
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  padding: 0;
+
+  text-align: center;
+}

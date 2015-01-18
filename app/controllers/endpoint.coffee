@@ -147,4 +147,26 @@ EndpointController = Ember.ObjectController.extend
 
   ).observes('pings.[]')
 
+  ###*
+  Average ping time
+
+  @property maxPings
+  @type {Integer}
+  ###
+  avgPingTime: (->
+    totalPingTime = @get('pings').reduce (prev = 0, ping) ->
+      prev + ping.get('pingTime')
+
+    totalPingTime / @get('maxPings')
+  ).property('maxPings', 'pings.@each')
+
+  actions:
+    delete: ->
+      endpoint = @get('model')
+      pings = @get('pings')
+
+      endpoint.destroyRecord()
+      pings.forEach (ping) ->
+        ping.destroyRecord()
+
 `export default EndpointController`

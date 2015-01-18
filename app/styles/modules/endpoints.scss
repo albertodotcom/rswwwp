@@ -8,6 +8,8 @@
 }
 
 .endpoints-widget {
+  position: relative;
+
   width: 300px;
   height: 300px;
   padding: 0 15px;
@@ -16,6 +18,16 @@
   @include box-shadow(1px 1px 2px 1px $color03);
 
   background-color: $color05;
+}
+
+.endpoints-widget-buttons {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+
+  text-align: right;
 }
 
 .endpoint-widget-error {
@@ -33,4 +45,8 @@
 .endpoints-widget-title {
   display: block;
   margin-bottom: 15px;
+}
+
+.endpoint-widget-info {
+  margin: 0;
 }
