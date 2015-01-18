@@ -3,7 +3,7 @@
 EndpointController = Ember.ObjectController.extend
   needs: ['endpoints']
 
-  pingUrl: ->
+  pingUrl: (->
     uri = @get('uri')
 
     sendTime = (new Date()).getTime()
@@ -30,6 +30,7 @@ EndpointController = Ember.ObjectController.extend
         if ping.save()
           endpoint.get('pings').pushObject(ping)
           endpoint.save()
+  ).on('init')
 
   runInterval: null
 
