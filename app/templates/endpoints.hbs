@@ -3,8 +3,11 @@
     {{input type='url' value=newEndPoint class='topbar-form-input' placeholder='http://www.example.com'}}
     <button name="submit" class='btn btn-1'>Track</button>
   </form>
+
+  {{#if model.length}}
   <button class='btn btn-1' {{action 'ping'}}>Ping All</button>
   {{input type='checkbox' checked=isPolling}}
+  {{/if}}
 </section>
 
 <section class='endpoints'>
