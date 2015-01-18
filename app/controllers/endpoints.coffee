@@ -20,4 +20,8 @@ EndpointsController = Ember.ArrayController.extend
       @toArray().forEach (endpoint) ->
         endpoint.pingUrl()
 
+    togglePolling: ->
+      @toggleProperty('isPolling')
+      return
+
 `export default EndpointsController`

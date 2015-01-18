@@ -5,8 +5,21 @@
   </form>
 
   {{#if model.length}}
-  <button class='btn btn-1' {{action 'ping'}}>Ping All</button>
-  {{input type='checkbox' checked=isPolling}}
+  <div class='pingbar'>
+    <button class='btn btn-1' {{bind-attr disabled=isPolling}} {{action 'ping'}}>Ping all now</button>
+
+    <span>or<span>
+
+        <button class='btn btn-1' {{action 'togglePolling'}}>
+          {{#if isPolling}}
+          Stop Polling
+          {{else}}
+          Ping in polling
+          {{/if}}
+        </button>
+
+    <span>every 10 seconds</span>
+  </div>
   {{/if}}
 </section>
 
