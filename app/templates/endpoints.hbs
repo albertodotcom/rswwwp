@@ -1,6 +1,6 @@
 <section class='topbar'>
   <form class='topbar-form' {{action 'addEndPoint' on='submit'}}>
-    <label class='topbar-form-label'>Add url:&nbsp{{input type='url' value=newEndPoint class='topbar-form-input' placeholder='http://www.example.com'}}</label>
+    {{input type='url' value=newEndPoint class='topbar-form-input' placeholder='http://www.example.com'}}
     <button name="submit" class='btn btn-1'>Track</button>
   </form>
   <button class='btn btn-1' {{action 'ping'}}>Ping All</button>
@@ -11,11 +11,11 @@
 
   {{#each}}
   <div class='endpoints-widget'>
-  <h3 class='endpoints-widget-title'>{{uri}}</h3>
+  {{shape-graph ratio=lastPingRatio}}
+  <a {{bind-attr href=uri}} target='_blank' class='endpoints-widget-title'>{{uri}}</a>
   {{#with pings.lastObject as ping}}
   <div>Last ping: {{format-date ping.date}}. Response Time: {{ping.pingTime}} ms</div>
   {{/with}}
-  {{shape-graph ratio=lastPingRatio}}
   {{/each}}
 
 </section>

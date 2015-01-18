@@ -1,15 +1,14 @@
 // My variables
-$color01: #4285e0; // blue
-$color02: #404041; // dark text
-$color03: #939597; // light text
-$color04: #f1f1f2; // gray bg color
+$color01: #009587; // green
+$color02: #36464e; // dark text
+$color03: #ccc; // light text
+$color04: #f4f4f4; // gray bg color
 $color05: #fff; // white
 
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed|Fjalla+One);
 $font01: 'Roboto Condensed', sans-serif;
 $font02: 'Fjalla One', sans-serif;
 $font-weight-1: 400;
-$font-weight-2: 600;
 $font-size-1: 20px;
 $font-size-2: 16px;
 
@@ -33,6 +32,7 @@ html {
 body {
   color: $color02;
   font-family: $font01;
+  background-color: $color04;
 }
 
 // general layout styles
@@ -49,10 +49,28 @@ body {
   margin-right: auto;
 }
 
+a {
+  text-decoration: none;
+  color: $color01;
+
+  &:hover, &:active {
+    text-decoration: underline;
+  }
+}
+
 // Title
 .title {
+  margin-bottom: 0;
+
   font-family: $font02;
   font-weight: $font-weight-1;
+  text-align: center;
+  color: $color02;
+}
+
+.subtitle {
+  margin-top: 0;
+
   text-align: center;
   color: $color02;
 }

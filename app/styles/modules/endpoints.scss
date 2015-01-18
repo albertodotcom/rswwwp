@@ -11,11 +11,14 @@
   width: 300px;
   height: 300px;
   padding: 0 15px;
-  border: 3px dashed $color04;
+  border: 0;
   margin: 10px 0;
+  @include box-shadow(1px 1px 2px 1px $color03);
 
-  text-align: center;
+  background-color: $color05;
 }
 
 .endpoints-widget-title {
+  display: block;
+  margin-bottom: 15px;
 }

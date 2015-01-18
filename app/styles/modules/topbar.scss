@@ -8,12 +8,6 @@
   text-align: center;
 }
 
-.topbar-form-label {
-  width: 150px;
-  border-bottom: 1px solid $color02;
-  padding: 5px;
-}
-
 .topbar-form-input {
   width: 300px;
   border: 0;
@@ -21,4 +15,5 @@
 
   outline: none;
   font-size: $font-size-1;
+  color: $color02;
 }
