@@ -161,6 +161,9 @@ EndpointController = Ember.ObjectController.extend
     totalPingTime = @get('pings').reduce (prev = 0, ping) ->
       prev + ping.get('pingTime')
 
+    if isNaN(totalPingTime)
+      return ''
+
     parseInt(totalPingTime / @get('pings.length'))
   ).property('maxPings', 'pings.@each')
 
