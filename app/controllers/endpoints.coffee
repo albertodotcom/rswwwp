@@ -52,7 +52,12 @@ EndpointsController = Ember.ArrayController.extend
       newEndpoint.save().then =>
         @set('newEndPoint', '')
 
-        @findBy('id', newEndpoint.get('id')).pingUrl()
+        endpointCtrl = @findBy('id', newEndpoint.get('id'))
+
+        if @get('isPolling')
+          endpointCtrl.pingPolling()
+        else
+          endpointCtrl.pingUrl()
 
     ###*
     Ping all the endpoints
